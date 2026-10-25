@@ -1,4 +1,5 @@
 modules = ["nodejs-24"]
+run = "javac -d out src/main/java/Main.java && java -cp out Main"
 
 [deployment]
 router = "application"
@@ -8,9 +9,6 @@ deploymentTarget = "autoscale"
 args = ["pnpm", "store", "prune"]
 env = { "CI" = "true" }
 
-[workflows]
-runButton = "Project"
-
 [agent]
 stack = "PNPM_WORKSPACE"
 expertMode = true
@@ -18,3 +16,7 @@ expertMode = true
 [postMerge]
 path = "scripts/post-merge.sh"
 timeoutMs = 20000
+
+[nix]
+channel = "stable-25_05"
+packages = ["jdk21"]
